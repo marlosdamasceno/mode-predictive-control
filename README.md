@@ -125,7 +125,7 @@ If **N** is too small the car get out of the road really soon, as is possible to
 If **N** is too big, again, the car get out of the road really soon, because it tries to guess much further in the future. For **N** equals to 40.
 ![alt text][image3]
 
-To conclude, a big **_dt_**, tested with 2 seconds, it will result in the car very slow at the beginning that at some point the car stop as the image above.
+To conclude, a big **_dt_**, tested with 2 seconds, it will result in the car very slow at the beginning. Moreover, the car is goind to stop at some point, as in the image above.
 ![alt text][image4]
 
 I end up with **_N_** equals to 10 and **_dt_** equals to 0.1.
