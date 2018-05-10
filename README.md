@@ -19,8 +19,11 @@
 I had some issues with the installation of the dependency libraries CppAd and Ipopt the links above helped me a lot:
 
 [Not very happy about sudden introduction of CppAD and Ipopt](https://discussions.udacity.com/t/not-very-happy-about-sudden-introduction-of-cppad-and-ipopt/309794/23)
-[Problem installing IPopt on Ubuntu - configure: error: Required package BLAS not found.](https://discussions.udacity.com/t/problem-installing-ipopt-on-ubuntu-configure-error-required-package-blas-not-found/473646)
+
+[Problem installing IPopt on Ubuntu - configure: error: Required package BLAS not found](https://discussions.udacity.com/t/problem-installing-ipopt-on-ubuntu-configure-error-required-package-blas-not-found/473646)
+
 [Installing Ipopt and CppAD](https://github.com/udacity/CarND-MPC-Project/blob/master/install_Ipopt_CppAD.md)
+
 
 ## [Rubric](https://review.udacity.com/#!/rubrics/896/view) Points
 ### Here I will consider the rubric points individually and describe how I addressed each point in my implementation.
@@ -87,20 +90,21 @@ The model used in this project it is a simple kinematic model, that does not con
 It follow the lessons (lesson 19, section 9), specially this [link](https://youtu.be/bOQuhpz3YfU).
 Here are the equations:
 ![alt text][image1]
+
 Where the states are:
-* ** *x, y* **:  Position of the car.
-* ** *ψ* **: Heading direction of the car.
-* ** *v* **: Velocity of the car.
-* ** *cte* **: Cross-track error.
-* ** *eψ* **: Orientation error.
+* **_x, y_**:  Position of the car.
+* **_ψ_**: Heading direction of the car.
+* **_v_**: Velocity of the car.
+* **_cte_**: Cross-track error.
+* **_eψ_**: Orientation error.
 
 The actuators are:
-* ** *a* **: Acceleration of the car (throttle).
-* ** *δ* **: Steering angle.
+* **_a_**: Acceleration of the car (throttle).
+* **_δ_**: Steering angle.
 
 The constants are:
-* ** *Lf* **: Distance between the gravity center to the front of the viechle (2.67m).
-* ** *dt* **: Duration of each step in seconds.
+* **_Lf_**: Distance between the gravity center to the front of the viechle (2.67m).
+* **_dt_**: Duration of each step in seconds.
 
 
 That in c++ code is:
@@ -114,14 +118,17 @@ fg[2 + mpc->starts[5] + i] = epsi1 - ((psi0 - psides0) - v0 * delta0 / Lf * dt);
 ```
 
 #### 2. Timestep Length and Elapsed Duration (N & dt): *Student discusses the reasoning behind the chosen N (timestep length) and dt (elapsed duration between timesteps) values. Additionally the student details the previous values tried.*
-The choose of the ** *N* ** and ** *dt* ** was based on this [link](https://youtu.be/bOQuhpz3YfU) and the lesson 19 section 5, about the length and duration. Where it said that ** *dt* ** must be small as possible and **T** larger as possible, where **T** (future prediction) is `dt x N`.
+The choose of the **_N_** and **_dt_** was based on this [link](https://youtu.be/bOQuhpz3YfU) and the lesson 19 section 5, about the length and duration. Where it said that **_dt_** must be small as possible and **T** larger as possible, where **T** (future prediction) is `dt x N`.
 If **N** is too small the car get out of the road really soon, as is possible to see in the image above with **N** equals to 2.
 ![alt text][image2]
+
 If **N** is too big, again, the car get out of the road really soon, because it tries to guess much further in the future. For **N** equals to 40.
 ![alt text][image3]
-To conclude, a big ** *dt* **, tested with 2 seconds, it will result in the car very slow at the beginning that at some point the car stop as the image above.
+
+To conclude, a big **_dt_**, tested with 2 seconds, it will result in the car very slow at the beginning that at some point the car stop as the image above.
 ![alt text][image4]
-I end up with ** *N* ** equals to 10 and ** *dt* ** equals to 0.1.
+
+I end up with **_N_** equals to 10 and **_dt_** equals to 0.1.
 
 #### 3. Polynomial Fitting and MPC Preprocessing: *A polynomial is fitted to waypoints. If the student preprocesses waypoints, the vehicle state, and/or actuators prior to the MPC procedure it is described.*
 These calculations is done before the MPC as is possible to see on the code below (base in this [link](https://youtu.be/bOQuhpz3YfU)):
