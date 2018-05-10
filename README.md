@@ -170,4 +170,5 @@ ___
 
 #### 1. The vehicle must successfully drive a lap around the track: *No tire may leave the drivable portion of the track surface. The car may not pop up onto ledges or roll over any surfaces that would otherwise be considered unsafe (if humans were in the vehicle). The car can't go over the curb, but, driving on the lines before the curb is ok.*
 ![alt text][image5]
+
 [Youtube video](https://youtu.be/7jOcGwMgDcQ)
